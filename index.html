@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contador de pulsaciones por minuto.">
+    <meta name="keywords" content="contador, counter, beats, per, minute">
+    <meta name="author" content="Mario Lujan">
+    <!-- <link rel="icon" href="favicon.ico"> -->
+    <style>
+        body {
+            background-color: #D3D3D3;
+            font-family: 'Courier New', Courier, monospace;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 2em;
+        }
+        
+        button {
+            background-color: #3c723c;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        
+        p {
+            font-size: 1.5em;
+        }
+        
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 18px;
+            }
+        
+            h2 {
+                font-size: 1.5em;
+            }
+        
+            p {
+                font-size: 1.2em;
+            }
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+        <div>
+            <h2>Contador de PPM (Pulsaciones Por Minuto)</h2>
+            <button id="myButton">Presiona aquí</button>
+            <p id="ppm">0</p>
+        </div>
+
+    <script>
+        let lastTime = null;
+
+        function updatePPM() {
+            let currentTime = new Date();
+            if (lastTime !== null) {
+                let diffInSeconds = (currentTime - lastTime) / 1000;
+                let ppm = 60 / diffInSeconds;
+                document.getElementById("ppm").innerHTML = ppm.toFixed(2);
+            }
+            lastTime = currentTime;
+        }
+
+        document.getElementById("myButton").addEventListener("click", updatePPM);
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Control") {
+                updatePPM();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
